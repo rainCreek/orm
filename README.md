@@ -44,7 +44,7 @@ err := engine.Find(&everyone)
 ...
 ```
 
-### FindByID(id int)
+### FindByID
 传入一个主键字段的值，作为查询条件：
 1. 查询单条数据使用**Get方法**，根据Id来获得单条数据
 2. 直接执行一个SQL查询
