@@ -59,8 +59,17 @@ engine.Id(id).Get(&user)
 
 相当于 `SELECT * FROM user Where id = id`
 
+## 测试
+### 运行mysql并建立好数据库
 
-## ab测试
+
+### 插入数据
+
+
+### 查询数据
+
+
+### ab测试
 
 
 
