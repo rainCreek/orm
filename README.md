@@ -59,12 +59,17 @@ engine.Id(id).Get(&user)
 
 相当于 `SELECT * FROM user Where id = id`
 
-## 对比 database/sql 与 orm 实现的异同
-
-| |database/sql|orm
-|--|:--:|:--:|
-|编程效率| | |
-|程序结构| | |
-|服务性能| | |
 
 ## ab测试
+
+
+
+## 对比 database/sql 与 xorm 
+
+由以上ab测试可以看出
+
+| |database/sql|xorm
+|--|:--:|:--:|
+|编程效率|相比xorm编程效率较低 |封装了SQL语句，编程效率更高 |
+|程序结构|提供数据库操作接口|形式上比较简洁 |
+|服务性能|相比xorm花费的时间稍少 |对请求服务的时间会增加 |
