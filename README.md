@@ -66,11 +66,148 @@ engine.Id(id).Get(&user)
 ### 插入数据
 
 
+
 ### 查询数据
+
+```
+C:\Users\80545>curl -d "username=ooo&departname=1" http://localhost:8080/service/userinfo
+{
+  "UID": 1,
+  "UserName": "ooo",
+  "DepartName": "1",
+  "CreateAt": "2017-11-29T18:21:42.9758369+08:00"
+}
+C:\Users\80545>curl http://localhost:8080/service/userinfo?userid=1
+{
+  "UID": 1,
+  "UserName": "ooo",
+  "DepartName": "1",
+  "CreateAt": "2017-11-29T18:21:42.9758369+08:00"
+}
+```
 
 
 ### ab测试
 
+
+xorm：
+```
+D:\Apache\Apache24\bin>ab -n 1000 -c 100 http://localhost:8080/?userid=
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /?userid=
+Document Length:        19 bytes
+
+Concurrency Level:      100
+Time taken for tests:   2.035 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      176000 bytes
+HTML transferred:       19000 bytes
+Requests per second:    435.76 [#/sec] (mean)
+Time per request:       229.484 [ms] (mean)
+Time per request:       2.295 [ms] (mean, across all concurrent requests)
+Transfer rate:          74.90 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   10  29.0      0     162
+Processing:     3  207  50.7    206     446
+Waiting:        2  205  52.6    206     446
+Total:          4  217  42.7    211     446
+
+Percentage of the requests served within a certain time (ms)
+  50%    211
+  66%    221
+  75%    237
+  80%    261
+  90%    278
+  95%    301
+  98%    312
+  99%    317
+ 100%    446 (longest request)
+```
+
+database/sql
+
+```
+D:\Apache\Apache24\bin>ab -n 1000 -c 100 http://localhost:8080/?userid=
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /?userid=
+Document Length:        19 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.564 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      176000 bytes
+HTML transferred:       19000 bytes
+Requests per second:    585.77 [#/sec] (mean)
+Time per request:       169.374 [ms] (mean)
+Time per request:       1.690 [ms] (mean, across all concurrent requests)
+Transfer rate:          98.29 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   10  19.0      0     92
+Processing:    13  114  50.7    106     446
+Waiting:        5   51  23.5     46     157
+Total:         24  157  42.7    161     336
+
+Percentage of the requests served within a certain time (ms)
+  50%    109
+  66%    125
+  75%    118
+  80%    122
+  90%    120
+  95%    132
+  98%    153
+  99%    169
+ 100%    242 (longest request)
+```
 
 
 ## 对比 database/sql 与 xorm 
